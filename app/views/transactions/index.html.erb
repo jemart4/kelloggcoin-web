@@ -15,23 +15,23 @@
 
   <% for company in transactions %>
 
- 
+    
+     <%   id = company["from_user_id"] %>
+      
+      <% a = id.class %>
+        <%= a %>
+       <% if a = "NilClass" %>
+        <li>Initial Coin Offering <%= company["amount"] %>  TO <%= company["to_user_id"] %> </li>
+        
+       <% else %>
+        <%  name1 = names[0] #need to fix so can accept a nil %> 
+    
+        <li> <%= name1["name"] %> </li>
+       
+        <li><%= company["amount"] %> FROM <%= company["from_user_id"] %> TO <%= company["to_user_id"] %> </li>
+
+        <%end %>
   
-  <% #name1 = User.find_by({"id" => company["from_user_id"]})%>
-  <% #var = name1[0]["name"] %>
-
-  <%  id = company["from_user_id"] 
-    if id = "nil"
-      id=0
-    end 
-  
-  %>
-
-  <%  name1 = names[id] %> 
-  <li> <%= name1["name"] %> </li>
-
-  <li><%= company["amount"] %> FROM <%= company["from_user_id"] %> TO <%= company["to_user_id"] %> </li>
-
   <li> </li>
 
   <%end %>
