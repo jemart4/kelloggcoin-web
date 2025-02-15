@@ -2,7 +2,113 @@
 
 <!-- Step 1: List all transactions, starting with the ICO -->
 
+<% 
+  transactions = Transaction.all 
+  names = User.all
+%>
+
+
+
+<p>There are <%= transactions.count %> transactions: </p>
+
+<ul>
+
+  <% for company in transactions %>
+
+ 
+  
+  <% #name1 = User.find_by({"id" => company["from_user_id"]})%>
+  <% #var = name1[0]["name"] %>
+
+  <%  id = company["from_user_id"] 
+    if id = "nil"
+      id=0
+    end 
+  
+  %>
+
+  <%  name1 = names[id] %> 
+  <li> <%= name1["name"] %> </li>
+
+  <li><%= company["amount"] %> FROM <%= company["from_user_id"] %> TO <%= company["to_user_id"] %> </li>
+
+  <li> </li>
+
+  <%end %>
+</ul>
+
+
 <!-- Step 2: Calculate and display the balances -->
+
+<%     
+
+ben_bal=0
+brian_bal=0
+evan_bal=0
+ant_bal=0
+
+ 
+
+
+ %> 
+
+ <p>There are <%= names.count %> users: </p>
+
+<li> <%= names[0]["name"] %> </li>
+
+
+<% 
+
+index=0
+loop do 
+  if index == transactions.size
+    break
+  end
+ 
+  # bens balance transations 
+if transactions[index]["from_user"] == "ben" #need to change to id number of ben 
+  ben_bal = ben_bal - transactions[index]["amount"]
+end
+if transactions[index]["to_user"] == "ben"
+  ben_bal = ben_bal + transactions[index]["amount"]
+end
+
+
+# brians balance transations 
+if transactions[index]["from_user"] == "brian"
+  brian_bal = brian_bal - transactions[index]["amount"]
+end
+if transactions[index]["to_user"] == "brian"
+  brian_bal = brian_bal + transactions[index]["amount"]
+end
+
+# evans balance transations 
+if transactions[index]["from_user"] == "evan"
+  evan_bal = evan_bal - transactions[index]["amount"]
+end
+if transactions[index]["to_user"] == "evan"
+  evan_bal = evan_bal + transactions[index]["amount"]
+end
+
+# anthony's balance transations 
+if transactions[index]["from_user"] == "anthony"
+  ant_bal = ant_bal - transactions[index]["amount"]
+end
+if transactions[index]["to_user"] == "anthony"
+  ant_bal = ant_bal + transactions[index]["amount"]
+end
+
+
+index = index + 1 
+end
+
+
+%>
+
+<li><%= ben_bal %> </li>
+<li><%= brian_bal %> </li>
+<li><%= ant_bal %> </li>
+<li><%= evan_bal %> </li>
 
 <!-- 
 Expected balances:
